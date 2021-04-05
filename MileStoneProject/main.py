@@ -1,3 +1,5 @@
+import random
+
 #global variables
 
 suits = ['Hearts', 'Diamonds', 'Spades', 'Clubs']
@@ -19,10 +21,30 @@ class Card:
         return self.rank + " of " + self.suit
 
 
+class Deck:
 
-card = Card("Hearts", "Two")
+    def __init__(self):
+        self.allcards = []
+
+        for i in suits:
+            for j in ranks:
+                #Create the card object
+                card = Card(i,j)
+                self.allcards.append(card)
+
+    def shuffle(self):
+        random.shuffle(self.allcards)
+
+    def deal_one(self):
+        return self.allcards.pop()
+
+
+deck = Deck()
+deck.shuffle()
+
 
 if __name__ == '__main__':
     print("Running")
-    print(card.__str__())
-    print(values[card.rank])
+
+    for i in deck.allcards:
+        print(i.__str__())
