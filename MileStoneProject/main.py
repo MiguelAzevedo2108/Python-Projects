@@ -39,8 +39,35 @@ class Deck:
         return self.allcards.pop()
 
 
+class Player:
+
+    def __init__(self, name):
+        self.name = name
+        self.allcards = []
+
+    def add_cards(self,newCards):
+        if type(newCards) == type([]):
+            #add multiple Cards aka List
+            self.allcards.extend(newCards)
+        else:
+            #Add just 1 card
+            self.allcards.append(newCards)
+
+    def remove_one(self):
+        return self.allcards.pop()
+
+    def __str__(self):
+        return f'Player {self.name} has {len(self.allcards)} cards.'
+
+
 deck = Deck()
 deck.shuffle()
+
+player = Player('Miguel')
+
+player.add_cards(deck.deal_one())
+player.add_cards(deck.deal_one())
+
 
 
 if __name__ == '__main__':
@@ -48,3 +75,9 @@ if __name__ == '__main__':
 
     for i in deck.allcards:
         print(i.__str__())
+
+    print(player.__str__())
+    for i in player.allcards:
+        print(i.__str__())
+
+
