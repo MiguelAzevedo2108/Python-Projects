@@ -60,24 +60,94 @@ class Player:
         return f'Player {self.name} has {len(self.allcards)} cards.'
 
 
-deck = Deck()
-deck.shuffle()
-
-player = Player('Miguel')
-
-player.add_cards(deck.deal_one())
-player.add_cards(deck.deal_one())
-
-
-
 if __name__ == '__main__':
-    print("Running")
+    print("Game Starting")
 
-    for i in deck.allcards:
-        print(i.__str__())
+    player1 = Player('One')
+    player2 = Player('Two')
 
-    print(player.__str__())
-    for i in player.allcards:
-        print(i.__str__())
+    deck = Deck()
+    deck.shuffle()
+
+    while len(deck.allcards) != 0:
+        player1.add_cards(deck.deal_one())
+        player2.add_cards(deck.deal_one())
+
+    print("Dealing Completed")
+    print(len(player1.allcards))
+    print(len(player2.allcards))
+
+    game_on = True
+
+    round = 0
+
+    while game_on:
+        round += 1
+        print('round : ', round)
+
+        if len(player1.allcards) == 0:
+            print("Player 2 won")
+            game_on = False
+            break
+        if len(player2.allcards) == 0:
+            print("Player 1 won")
+            game_on = False
+            break
+
+
+        #Game is still on
+
+        at_war = True
+        card_player1 = []
+        card_player2 = []
+
+        card_player1.append(player1.remove_one())
+        card_player2.append(player2.remove_one())
+
+        while at_war:
+            if card_player1[-1].value > card_player2[-1].value:
+                #Player 1 Card > Player 2 Card, player 1 gets all the cards
+                player1.add_cards(card_player1)
+                player1.add_cards(card_player2)
+                print('1 if')
+
+                print('len deck p1 - ', len(player1.allcards))
+                print('len deck p2 - ', len(player2.allcards))
+                at_war = False
+                break
+
+            if card_player1[-1].value < card_player2[-1].value:
+                #Player 1 Card < Player 2 Card, player 2 gets all the cards
+
+                player2.add_cards(card_player1)
+                player2.add_cards(card_player2)
+                print('2 if')
+                print('len deck p1 - ', len(player1.allcards))
+                print('len deck p2 - ', len(player2.allcards))
+
+                at_war = False
+                break
+
+            else:
+                print("War!")
+                if len(player1.allcards) < 5:
+                    print("Player One unable to play war! Game Over at War")
+                    print("Player Two Wins!\n Player One Loses!")
+                    game_on = False
+                    break
+
+                elif len(player2.allcards) < 5:
+                    print("Player Two unable to play war! Game Over at War")
+                    print("Player One Wins!\nPlayer One Loses!")
+                    game_on = False
+                    break
+                    # Otherwise, we're still at war, so we'll add the next cards
+                else:
+                    for num in range(5):
+                        card_player1.append(player1.remove_one())
+                        card_player2.append(player2.remove_one())
+
+
+
 
 
