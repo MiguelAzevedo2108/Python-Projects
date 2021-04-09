@@ -148,6 +148,3 @@ if __name__ == '__main__':
                         card_player2.append(player2.remove_one())
 
 
-
-
-
