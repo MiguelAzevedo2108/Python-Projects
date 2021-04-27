@@ -35,5 +35,5 @@ if __name__ == '__main__':
     for r in results:
         if r != '':
             print(r.group())
-            
+
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
