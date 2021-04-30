@@ -57,9 +57,6 @@ def receive_message():
             print(body)
 
 
-    pass
-
-
 if __name__ == '__main__':
     print('Code begin')
     #print(send_email())
